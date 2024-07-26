@@ -53,7 +53,7 @@ class Bust(ModelComponent):
         self.x_dist = -abs(uc_left_x - uc_radius - (lc_left_x - lc_radius))
 
     def get_hovered_point(self, surface: pyg.Surface, mouse_position):
-        if pyg.key.get_pressed()[pyg.K_LCTRL]:
+        if pyg.key.get_pressed()[pyg.K_LCTRL] or pyg.key.get_pressed()[pyg.K_RCTRL]:
             return round(mouse_position[0], 2), round(mouse_position[1], 2)
 
         else:

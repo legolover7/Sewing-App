@@ -30,7 +30,7 @@ class WindowManager:
             self.width, self.height = window_size
         
         self.window = pyg.display.set_mode((self.width, self.height), pyg.FULLSCREEN)        
-        self.draw_center_line = True
+        self.draw_center_line = False
 
         self.dimmed_display = pyg.Surface(self.display.get_size())
         self.dimmed_display.fill((2, 2, 2))

@@ -1,0 +1,9 @@
+# Folders
+classes/__pycache__
+Editor/__pycache__
+Editor/components/__pycache__
+menus/__pycache__
+modules/__pycache__
+popups/__pycache__
+
+data/

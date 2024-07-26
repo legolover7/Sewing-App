@@ -71,7 +71,7 @@ def Main(winman: WindowManager):
 
                     elif key == pyg.K_ESCAPE:
                         if adding_line:
-                            model.clothes_data["points"].pop()
+                            model.clothes_data["verticies"].pop()
                             adding_line = False
                         model.edit_mode = "none"
 
@@ -115,8 +115,8 @@ def Main(winman: WindowManager):
         model.render(winman.display, not overlay.current_popup)
         overlay.render(winman.display)
 
-        if left_click and len(model.clothes_data["points"]):
-            pyg.draw.line(winman.display, Colors.red, model.clothes_data["points"][-1], model.hovered_point)
+        if left_click and len(model.clothes_data["verticies"]):
+            pyg.draw.line(winman.display, Colors.red, model.clothes_data["verticies"][-1][:2], model.hovered_point[:2])
 
         winman.render()
         Globals.clock.tick(Globals.FPS)

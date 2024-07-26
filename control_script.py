@@ -6,6 +6,7 @@ import sys
 from classes.globals import FilePaths, Globals
 from classes.window import WindowManager
 
+from menus.settings import SettingsMenu
 from menus.welcome import WelcomeMenu
 
 import Editor.control_script as ecs
@@ -13,6 +14,8 @@ import Editor.control_script as ecs
 def Main():
     winman = WindowManager("Sewing App")
     welcome_menu = WelcomeMenu(winman)
+    settings_menu = SettingsMenu(winman)
+    current_menu = welcome_menu
 
     while True:
         for event in pyg.event.get():
@@ -34,16 +37,16 @@ def Main():
                     winman.toggle_fullscreen()
                 
                 else:
-                    welcome_menu.key_press(event.key)
+                    current_menu.key_press(event.key)
 
             elif event.type == pyg.MOUSEBUTTONDOWN:
                 if event.button == 4 or event.button == 5:
-                    welcome_menu.scroll(event.button)
+                    current_menu.scroll(event.button)
 
             elif event.type == pyg.MOUSEBUTTONUP:
-                welcome_menu.mouse_click(event.button)
+                current_menu.mouse_click(event.button)
 
-        if welcome_menu.draw:
+        if welcome_menu.draw and current_menu == welcome_menu:
             # Yuck
             if welcome_menu.popups["clothes"].preset_active:
                 for name in welcome_menu.popups["clothes"].radios:
@@ -62,11 +65,16 @@ def Main():
                         if m["title"] == title:
                             ecs.model.measurements = m["values"]
                             ecs.model.type = m["sex"]
+                            ecs.model.title = title
 
             ecs.Main(winman)
 
-        winman.display.fill((200, 50, 100))
-        welcome_menu.render(winman.display)
+        if current_menu.toggle_settings:
+            current_menu.toggle_settings = False
+            current_menu = welcome_menu if current_menu == settings_menu else settings_menu
+
+        winman.display.fill((100, 50, 100))
+        current_menu.render(winman.display)
         
         winman.render()
         Globals.clock.tick(Globals.FPS)

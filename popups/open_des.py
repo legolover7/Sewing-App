@@ -55,6 +55,8 @@ class OpenDesPopup(MenuBase):
                 self.parent.current_popup = None
 
             if self.buttons["load"].collides_mouse and self.selection:
+                self.parent.model.create_model()
+                self.parent.model.draw_model()
                 self.parent.model.clothes_data = self.data[self.selection.title]
                 self.parent.current_popup = None
 

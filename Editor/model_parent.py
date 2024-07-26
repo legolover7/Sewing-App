@@ -31,10 +31,11 @@ class Model:
         ]
         self.measurements = {}
         self.clothes_data = {}
-        self.type = "F"
-        self.model_hovered = False
         self.rotation = 0
+        self.model_hovered = False
+        self.highlight_model = False
 
+        self.type = "F"
         self.edit_mode = "none"
 
         # Colors for model segments
@@ -89,7 +90,7 @@ class Model:
             self.clothes_data["verticies"][i] = altered[0] + 1920/2, altered[1] + 1080/2, altered[2]
 
 
-    def draw_model(self, highlight_segments):
+    def draw_model(self, highlight_segments=True):
         """Draws the model, using Z indicies to determine which sections to show"""
         self.display.fill(Colors.charcoal)
 
@@ -107,7 +108,7 @@ class Model:
                 z = round((point1[2] + point2[2] + point3[2] + point4[2]) / 4)
 
                 # Add to the dictionary
-                if collider.collides_point(Globals.mouse_position, (component.xbounds[0], component.ybounds[0], component.xbounds[1] - component.xbounds[0], component.ybounds[1] - component.ybounds[0])) and highlight_segments:
+                if collider.collides_point(Globals.mouse_position, (component.xbounds[0], component.ybounds[0], component.xbounds[1] - component.xbounds[0], component.ybounds[1] - component.ybounds[0])) and self.highlight_model and highlight_segments:
                     color = Colors.green
                 else:
                     color = self.model_colors[i]

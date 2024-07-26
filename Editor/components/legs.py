@@ -42,7 +42,7 @@ class Legs(ModelComponent):
         self.x_dist = -abs(hip_center_x - hip_radius - (hip_center_x - self.ctw(measurements["knee_cir"]) / 2))
 
     def get_hovered_point(self, surface: pyg.Surface, mouse_position):
-        if pyg.key.get_pressed()[pyg.K_LCTRL]:
+        if pyg.key.get_pressed()[pyg.K_LCTRL] or pyg.key.get_pressed()[pyg.K_RCTRL]:
             return round(mouse_position[0], 2), round(mouse_position[1], 2)
 
         else:

@@ -105,7 +105,7 @@ class UIOverlay:
                 self.current_popup = self.popups["load_design"]
                 self.current_popup.refresh()
 
-            if self.buttons["pattern"].collides_mouse and len(self.model.clothes_data["points"]):
+            if self.buttons["pattern"].collides_mouse and len(self.model.clothes_data["verticies"]):
                 self.current_popup = self.popups["pattern"]
 
             if self.current_popup:

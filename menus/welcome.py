@@ -7,6 +7,7 @@ from classes.button import MenuButton
 import modules.collider as collider
 
 from menus.menu_base import MenuBase
+from menus.settings import SettingsMenu
 from popups.create import CreatePopup
 from popups.clothes import ClothesPopup
 
@@ -15,6 +16,7 @@ class WelcomeMenu(MenuBase):
         super().__init__(None, winman.get_size(), False)
         self.winman = winman
         self.draw = False
+        self.toggle_settings = False
 
         self.buttons = {
             "create_pattern": MenuButton(self, (winman.width / 2 - 175, winman.height / 2 - 50), (150, 100), ["+", "Create new", "pattern"]),
@@ -50,11 +52,15 @@ class WelcomeMenu(MenuBase):
 
     def mouse_click(self, button):
         if self.current_popup == None:
-            if self.buttons["create_pattern"].collides_mouse and button == 1:
-                self.current_popup = self.popups["create"]
-            
-            if self.buttons["quit"].collides_mouse and button == 1:
-                self.winman.quit()
+            if button == 1:
+                if self.buttons["create_pattern"].collides_mouse:
+                    self.current_popup = self.popups["create"]
+                
+                if self.buttons["quit"].collides_mouse:
+                    self.winman.quit()
+
+                if self.buttons["settings"].collides_mouse:
+                    self.toggle_settings = True
 
         else:
             if not self.current_popup.collides_mouse() and button == 1:
