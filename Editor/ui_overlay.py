@@ -5,7 +5,7 @@ from classes.display import Colors, Fonts
 from classes.window import WindowManager
 
 from Editor.ribbon import Ribbon
-from Editor.model_parent import Model
+from Editor.model.model import Model
 from popups.set_msmts import MSMTPopup
 from popups.pattern import PatternPopup
 from popups.open_des import OpenDesPopup
@@ -28,6 +28,7 @@ class UIOverlay:
             "add_points": MenuButton(self, (15, 100), (160, 60), ["Add Points"]),
             "add_lines": MenuButton(self, (15, 175), (160, 60), ["Add Lines"]),
             "load_design": MenuButton(self, (15, 250), (160, 60), ["Open Design"]),
+            "gen_lines": MenuButton(self, (15, 325), (160, 60), ["Gen Lines"]),
             "pattern": MenuButton(self, (self.width / 2 - 100, self.height - 50), (200, 40), ["Pattern"])
         }
 
